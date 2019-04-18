@@ -44,8 +44,13 @@ __date__ = "17 April 2019"
 ##########################################
 # User-Defined information below
 
+# Name of NMR STAR file to clean (include extension)
 FILE_NAME = "test.txt"
 
+# Amino acid sequence start correction
+CORRECTION = -1
+
+# Name of output file (include extension)
 OUTPUT_NAME = "output_test.list"
 
 ##########################################
@@ -90,13 +95,14 @@ def read_file(directory, nmrstar_entries=24):
     clean_df(df)
 
 
-def clean_df(df, outputname=OUTPUT_NAME):
+def clean_df(df, outputname=OUTPUT_NAME, correction=CORRECTION):
     """
     Clean up the relevant data. Isolate nitrogen and proton frequencies.
     Write SPARKY List file in proper format (include CRLF)
 
     :param df: pandas dataframe, set internally
     :param outputname: str, output file name set in parameters at top of script
+    :param correction: int, value to adjust amino acid start site
     :return: None
     """
     # Split data frame into separate data frames. This way we can validate
@@ -119,14 +125,19 @@ def clean_df(df, outputname=OUTPUT_NAME):
         f.write("{:>16} {:>10} {:>10} {:>1}".format("Assignment", "w1", "w2",
                                                     "\r\n"))
         f.write("\r\n")
+
         for index, row in df_1h.iterrows():
+
             # Check residue identity
-            if (df_1h.loc[index, "6"]+df_1h.loc[index, "5"] ==
-                    df_15n.loc[index, "6"]+df_15n.loc[index, "5"]):
+            if (df_1h.loc[index, "6"] + df_1h.loc[index, "5"] ==
+                    df_15n.loc[index, "6"] + df_15n.loc[index, "5"]):
+
                     f.write("{:>17} {:>10} {:>10} {:>1}".format(
-                        df_1h.loc[index, "6"]+df_1h.loc[index, "5"]+"N-H",
+                        df_1h.loc[index, "6"] +
+                        str(int(df_1h.loc[index, "5"]) + correction) + "N-H",
                         df_15n.loc[index, "10"], df_1h.loc[index, "10"],
                         "\r\n"))
+
             else:
                 print("Warning: Assignment Mismatch, skipping...")
 

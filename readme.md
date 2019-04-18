@@ -8,6 +8,12 @@ This script is a stand-alone utility for generating SPARKY assignment peak list 
 * Save NMR STAR File > v. 3  as ```.txt``` (right click BMRB link, Save As)
 * Put ```.txt``` file in current working directory
 
+Set ```FILE_NAME``` to the name of the NMR STAR File (include extension)  
+
+Set ```CORRECTION``` to an integer value to adjust amino acid sequence by (use 0 if no correction is needed)
+
+Set ```OUTPUT_NAME``` to what you want the output file to be called (include extension)
+
 ## Requirements
 * Python 3.x
 * pandas
