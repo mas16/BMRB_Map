@@ -24,6 +24,8 @@ Parameters
 ----------------
 FILE_NAME - file name of the data file, including the file extension
 
+CORRECTION - int value, factor to adjust amino acid sequence starting point
+
 OUTPUT_NAME - file name of the output file, including the file extension
 
 -----------------
