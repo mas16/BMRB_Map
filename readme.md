@@ -10,7 +10,7 @@ This script is a stand-alone utility for generating SPARKY assignment peak list 
 
 ## Requirements
 * Python 3.x
-# pandas
+* pandas
 
 ## Test Data
 A test NMR STAR file ```test.txt``` is provided with this repo as an example. 
